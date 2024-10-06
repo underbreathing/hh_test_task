@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="buttom_green" parent="Widget.AppCompat.Button">
+        <item name="android:textAppearance">@style/button_text_2</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/rounded_corners_green</item>
+    </style>
+
+    <style name="buttom_blue_short" parent="Widget.AppCompat.Button">
+        <item name="android:textAppearance">@style/button_text_2</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/button_toggle</item>
+    </style>
+
+    <style name="text_title_3">
+        <item name="android:textAppearance">@style/Title3</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+</resources>
