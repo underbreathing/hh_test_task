@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="log_in_code">
+        <item name="android:fontFamily">@font/sfprodisplaybold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontWeight">500</item>
+    </style>
+
     <style name="Title1">
         <item name="android:fontFamily">@font/sfprodisplaybold</item>
         <item name="android:textSize">22sp</item>

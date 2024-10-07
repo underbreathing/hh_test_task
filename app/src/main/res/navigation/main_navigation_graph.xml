@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation_graph"
+    app:startDestination="@id/fragmentSign">
+
+    <fragment
+        android:id="@+id/fragmentSign"
+        android:name="com.sheverdyaevartem.hh.sign_in.ui.log_in.FragmentLogin"
+        android:label="fragment_sign"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_fragmentSign_to_fragmentCodeEntry"
+            app:destination="@id/fragmentCodeEntry" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentCodeEntry"
+        android:name="com.sheverdyaevartem.hh.sign_in.ui.code_entry.FragmentCodeEntry"
+        android:label="fragment_code_entry"
+        tools:layout="@layout/fragment_code_entry" />
+</navigation>

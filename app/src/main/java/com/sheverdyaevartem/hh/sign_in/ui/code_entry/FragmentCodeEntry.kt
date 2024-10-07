@@ -1,0 +1,129 @@
+package com.sheverdyaevartem.hh.sign_in.ui.code_entry
+
+import android.content.Context
+import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
+import android.view.KeyEvent
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
+import androidx.core.os.bundleOf
+import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.sheverdyaevartem.hh.R
+import com.sheverdyaevartem.hh.databinding.FragmentCodeEntryBinding
+
+class FragmentCodeEntry : Fragment() {
+
+    companion object {
+
+        private const val ENTERED_EMAIL_FLAG = "email flag"
+
+        fun createArgs(email: String): Bundle {
+            return bundleOf(ENTERED_EMAIL_FLAG to email)
+        }
+    }
+
+    private var _binding: FragmentCodeEntryBinding? = null
+    private val binding get() = _binding!!
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentCodeEntryBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val email = arguments?.getString(ENTERED_EMAIL_FLAG)
+
+        binding.tvTitle.text = getString(R.string.code_entry_title, email)
+
+        requireActivity().onBackPressedDispatcher.addCallback {
+            findNavController().navigateUp()
+        }
+
+        setAsteriskMask(binding.code1, binding.code2, binding.code3, binding.code4)
+
+        setTextChangeLogic(binding.code1, binding.code2)
+        setTextChangeLogic(binding.code2, binding.code3)
+        setTextChangeLogic(binding.code3, binding.code4, true)
+
+        setBackspaceBehavior(binding.code4, binding.code3)
+        setBackspaceBehavior(binding.code3, binding.code2)
+        setBackspaceBehavior(binding.code2, binding.code1)
+
+    }
+
+    private fun setButtonConfirmAccess() {
+        binding.bConfirm.isEnabled =
+            binding.code1.text.isNotEmpty()
+                    && binding.code2.text.isNotEmpty()
+                    && binding.code3.text.isNotEmpty()
+                    && binding.code4.text.isNotEmpty()
+    }
+
+    private fun setBackspaceBehavior(currentEditText: EditText, previousEditText: EditText) {
+        currentEditText.setOnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_DEL && event.action == KeyEvent.ACTION_DOWN) {
+                if (currentEditText.text.isEmpty()) {
+                    previousEditText.requestFocus()
+                    previousEditText.setSelection(previousEditText.text.length)
+                }
+            }
+            false
+        }
+    }
+
+    private fun setAsteriskMask(vararg editTexts: EditText) {
+        editTexts.forEach { editText ->
+            editText.transformationMethod = PasswordTransformationMethod.getInstance()
+
+            editText.transformationMethod = object : PasswordTransformationMethod() {
+                override fun getTransformation(source: CharSequence, view: View): CharSequence {
+                    return object : CharSequence {
+                        override val length: Int
+                            get() = source.length
+
+                        override fun get(index: Int): Char {
+                            return '*'
+                        }
+
+                        override fun subSequence(startIndex: Int, endIndex: Int): CharSequence {
+                            return source.subSequence(startIndex, endIndex)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setTextChangeLogic(current: EditText, next: EditText, nextIsLast: Boolean = false) {
+        current.addTextChangedListener(onTextChanged = { charSequence, _, _, _ ->
+            if (charSequence?.length == 1) {
+                next.requestFocus()
+                setButtonConfirmAccess()
+            }
+        })
+        if (nextIsLast) {
+            next.addTextChangedListener(onTextChanged = { charSequence, _, _, _ ->
+                setButtonConfirmAccess()
+            })
+        }
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+}
