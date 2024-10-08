@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fragmentSearch"
+        android:icon="@drawable/search_state_default"
+        android:title="Поиск" />
+
+    <item
+        android:id="@+id/fragmentFavourites"
+        android:icon="@drawable/favourites_state_default"
+        android:title="Избранное" />
+
+    <item
+        android:id="@+id/fragmentResponses"
+        android:icon="@drawable/responses_state_default"
+        android:title="Отклики" />
+
+    <item
+        android:id="@+id/fragmentMessages"
+        android:icon="@drawable/messages_state_default"
+        android:title="Сообщения" />
+
+    <item
+        android:id="@+id/fragmentProfile"
+        android:icon="@drawable/profile_state_default"
+        android:title="Профиль" />
 
 </menu>

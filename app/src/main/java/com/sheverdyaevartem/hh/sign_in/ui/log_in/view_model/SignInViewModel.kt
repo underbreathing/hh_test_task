@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sheverdyaevartem.hh.sign_in.domain.api.NetworkRepository
 import com.sheverdyaevartem.hh.sign_in.domain.model.Resource
+import com.sheverdyaevartem.hh.sign_in.ui.utils.SingleLiveEvent
 import com.sheverdyaevartem.hh.sign_in.ui.log_in.view_model.states.CodeSendState
 import kotlinx.coroutines.launch
 

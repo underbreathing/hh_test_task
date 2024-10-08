@@ -1,4 +1,4 @@
-package com.sheverdyaevartem.hh.sign_in.ui.log_in.view_model
+package com.sheverdyaevartem.hh.sign_in.ui.utils
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData

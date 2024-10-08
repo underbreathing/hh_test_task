@@ -2,10 +2,7 @@ package com.sheverdyaevartem.hh.root_activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.WindowManager
 import androidx.core.view.isVisible
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.sheverdyaevartem.hh.R
@@ -16,6 +13,7 @@ class RootActivity : AppCompatActivity() {
     private var _binding: ActivityRootBinding? = null
     private val binding get() = _binding!!
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityRootBinding.inflate(layoutInflater)
@@ -25,6 +23,12 @@ class RootActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
 
         val navController = navHostFragment.navController
+
+        val navGraph = navController.navInflater.inflate(R.navigation.main_navigation_graph)
+
+        navGraph.setStartDestination(R.id.fragmentSearch)
+
+        navController.graph = navGraph
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
 
@@ -39,7 +43,13 @@ class RootActivity : AppCompatActivity() {
             }
         }
 
-        //binding.bottomNavigationPanel.setupWithNavController(navController)
+//        val badge = binding.bottomNavigationPanel.getOrCreateBadge(R.id.fragmentSearch)
+//        badge.number = 5
+//
+////        badge.backgroundColor = ContextCompat.getColor(this, R.color.badgeBackground)
+////        badge.badgeTextColor = ContextCompat.getColor(this, R.color.white)
+
+        binding.bottomNavigationPanel.setupWithNavController(navController)
     }
 
     override fun onDestroy() {

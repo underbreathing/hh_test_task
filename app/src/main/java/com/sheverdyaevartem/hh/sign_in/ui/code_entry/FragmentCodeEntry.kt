@@ -15,8 +15,13 @@ import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.sheverdyaevartem.hh.R
 import com.sheverdyaevartem.hh.databinding.FragmentCodeEntryBinding
+import com.sheverdyaevartem.hh.sign_in.ui.code_entry.view_model.CodeEntryViewModel
+import com.sheverdyaevartem.hh.sign_in.ui.code_entry.view_model.model.CodeVerifiedState
+import org.koin.android.ext.android.inject
+import java.lang.StringBuilder
 
 class FragmentCodeEntry : Fragment() {
 
@@ -31,6 +36,7 @@ class FragmentCodeEntry : Fragment() {
 
     private var _binding: FragmentCodeEntryBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: CodeEntryViewModel by inject()
 
 
     override fun onCreateView(
@@ -47,10 +53,6 @@ class FragmentCodeEntry : Fragment() {
 
         binding.tvTitle.text = getString(R.string.code_entry_title, email)
 
-        requireActivity().onBackPressedDispatcher.addCallback {
-            findNavController().navigateUp()
-        }
-
         setAsteriskMask(binding.code1, binding.code2, binding.code3, binding.code4)
 
         setTextChangeLogic(binding.code1, binding.code2)
@@ -61,6 +63,49 @@ class FragmentCodeEntry : Fragment() {
         setBackspaceBehavior(binding.code3, binding.code2)
         setBackspaceBehavior(binding.code2, binding.code1)
 
+        binding.bConfirm.setOnClickListener {
+            email?.let {
+                viewModel.verifySmsCode(it, getCode())
+            }
+        }
+
+        viewModel.codeVerified.observe(viewLifecycleOwner) { receivedData ->
+            when (receivedData) {
+                is CodeVerifiedState.Answer -> {
+                    if (receivedData.isAccepted) {
+                        findNavController().navigate(R.id.action_fragmentCodeEntry_to_fragmentSearch)
+                    } else {
+                        showSnackBar("Неверный код!")
+                    }
+                }
+
+                CodeVerifiedState.InternetError -> {
+                    showSnackBar("Проверьте соединение с интернетом")
+                }
+
+                CodeVerifiedState.RequestError -> {
+                    showSnackBar("Ошибка приложения\nобратитесь в поддержку")
+                }
+
+                CodeVerifiedState.ServerError -> {
+                    showSnackBar("На сервере ведутся работы")
+                }
+            }
+        }
+    }
+
+    private fun showSnackBar(message: String) {
+        Snackbar.make(binding.tvTitle, message, Snackbar.LENGTH_LONG)
+            .setAnchorView(binding.tvTitle).show()
+    }
+
+    private fun getCode(): String {
+        val codeAccumulator = StringBuilder()
+        codeAccumulator.append(binding.code1.text)
+        codeAccumulator.append(binding.code2.text)
+        codeAccumulator.append(binding.code3.text)
+        codeAccumulator.append(binding.code4.text)
+        return codeAccumulator.toString()
     }
 
     private fun setButtonConfirmAccess() {

@@ -27,7 +27,7 @@
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="Text1">
+    <style name="text_1">
         <item name="android:fontFamily">@font/sfprodisplayregular</item>
         <item name="android:textSize">14sp</item>
     </style>

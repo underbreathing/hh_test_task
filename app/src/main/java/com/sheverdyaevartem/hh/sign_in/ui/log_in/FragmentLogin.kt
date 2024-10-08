@@ -60,7 +60,7 @@ class FragmentLogin : Fragment() {
         viewModel.codeSend.observe(viewLifecycleOwner) { codeSendState ->
             when (codeSendState) {
                 CodeSendState.InternetError -> {
-                    showSnackBar("Проблемы с интернет соединением")
+                    showSnackBar("Проверьте соединение с интернетом")
                 }
 
                 is CodeSendState.NotFound -> {
