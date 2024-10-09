@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.sheverdyaevartem.hh.R
 import com.sheverdyaevartem.hh.databinding.FragmentCodeEntryBinding
+import com.sheverdyaevartem.hh.search.ui.fragment.FragmentSearch
 import com.sheverdyaevartem.hh.sign_in.ui.code_entry.view_model.CodeEntryViewModel
 import com.sheverdyaevartem.hh.sign_in.ui.code_entry.view_model.model.CodeVerifiedState
 import org.koin.android.ext.android.inject
@@ -73,7 +74,10 @@ class FragmentCodeEntry : Fragment() {
             when (receivedData) {
                 is CodeVerifiedState.Answer -> {
                     if (receivedData.isAccepted) {
-                        findNavController().navigate(R.id.action_fragmentCodeEntry_to_fragmentSearch)
+                        findNavController().navigate(
+                            R.id.action_fragmentCodeEntry_to_fragmentSearch,
+                            FragmentSearch.createArgs(receivedData.id)
+                        )
                     } else {
                         showSnackBar("Неверный код!")
                     }
@@ -117,7 +121,7 @@ class FragmentCodeEntry : Fragment() {
     }
 
     private fun setBackspaceBehavior(currentEditText: EditText, previousEditText: EditText) {
-        currentEditText.setOnKeyListener { v, keyCode, event ->
+        currentEditText.setOnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_DEL && event.action == KeyEvent.ACTION_DOWN) {
                 if (currentEditText.text.isEmpty()) {
                     previousEditText.requestFocus()

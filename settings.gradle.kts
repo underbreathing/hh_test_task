@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "HH test task"
+rootProject.name = "hh_test_task"
 include(":app")
  

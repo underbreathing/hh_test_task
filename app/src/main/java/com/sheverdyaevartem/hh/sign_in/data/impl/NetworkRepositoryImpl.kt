@@ -24,12 +24,15 @@ class NetworkRepositoryImpl(private val remoteDataSource: RemoteDataSource) : Ne
         }
     }
 
-    override suspend fun verifySmsCode(email: String, code: String): Flow<Resource<Boolean>> {
+    override suspend fun verifySmsCode(
+        email: String,
+        code: String
+    ): Flow<Resource<Pair<Boolean, String>>> {
         return flow {
             val response = remoteDataSource.doRequest(SmsCodeVerifyRequest(email, code))
 
             if (response is SmsCodeVerifiedResponse) {
-                emit(Resource.Answer(response.success))
+                emit(Resource.Answer(Pair(response.success, response.id)))
             } else {
                 emit(processResultCode(response.resultCode))
             }

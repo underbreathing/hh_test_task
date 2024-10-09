@@ -21,7 +21,8 @@ class CodeEntryViewModel(private val networkRepository: NetworkRepository) : Vie
             networkRepository.verifySmsCode(email, code).collect { data ->
                 when (data) {
                     is Resource.Answer -> {
-                        _codeVerified.value = CodeVerifiedState.Answer(data.data)
+                        _codeVerified.value =
+                            CodeVerifiedState.Answer(data.data.first, data.data.second)
                     }
 
                     is Resource.InternetError ->

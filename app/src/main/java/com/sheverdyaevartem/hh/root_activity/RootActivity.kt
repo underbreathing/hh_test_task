@@ -25,14 +25,14 @@ class RootActivity : AppCompatActivity() {
 
         val navController = navHostFragment.navController
 
-        val navGraph = navController.navInflater.inflate(R.navigation.main_navigation_graph)
-
-        navGraph.setStartDestination(R.id.fragmentSearch)
-
-        //достем id из sharedPreferences
-        val id = "1z4TbeDkbfXkvgpoJprXbN85uCcD7f00r"
-
-        navController.setGraph(navGraph,FragmentSearch.createArgs(id))
+//        val navGraph = navController.navInflater.inflate(R.navigation.main_navigation_graph)
+//
+//        navGraph.setStartDestination(R.id.fragmentSearch)
+//
+//        //достем id из sharedPreferences
+//        val id = "1z4TbeDkbfXkvgpoJprXbN85uCcD7f00r"
+//
+//        navController.setGraph(navGraph,FragmentSearch.createArgs(id))
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
 

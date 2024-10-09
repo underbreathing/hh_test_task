@@ -7,6 +7,6 @@ interface NetworkRepository {
 
     suspend fun verifyEmail(email: String): Flow<Resource<Boolean>>
 
-    suspend fun verifySmsCode(email: String, code: String): Flow<Resource<Boolean>>
+    suspend fun verifySmsCode(email: String, code: String): Flow<Resource<Pair<Boolean, String>>>
 
 }

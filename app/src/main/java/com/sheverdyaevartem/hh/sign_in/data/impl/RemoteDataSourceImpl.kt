@@ -28,8 +28,8 @@ class RemoteDataSourceImpl(
                         }
 
                         is SmsCodeVerifyRequest -> {
-                            //plug
-                            SmsCodeVerifiedResponse(true).apply { resultCode = 200 }
+                            val hardcodedId = "1z4TbeDkbfXkvgpoJprXbN85uCcD7f00r"
+                            SmsCodeVerifiedResponse(true, hardcodedId).apply { resultCode = 200 }
                         }
 
                         else -> {
