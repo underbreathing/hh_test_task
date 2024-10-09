@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.sheverdyaevartem.hh.R
 import com.sheverdyaevartem.hh.databinding.ActivityRootBinding
+import com.sheverdyaevartem.hh.search.ui.fragment.FragmentSearch
 
 class RootActivity : AppCompatActivity() {
 
@@ -28,7 +29,10 @@ class RootActivity : AppCompatActivity() {
 
         navGraph.setStartDestination(R.id.fragmentSearch)
 
-        navController.graph = navGraph
+        //достем id из sharedPreferences
+        val id = "1z4TbeDkbfXkvgpoJprXbN85uCcD7f00r"
+
+        navController.setGraph(navGraph,FragmentSearch.createArgs(id))
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
 

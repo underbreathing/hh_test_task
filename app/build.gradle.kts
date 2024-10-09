@@ -42,6 +42,8 @@ android {
 dependencies {
 
 
+    implementation(libs.adapterdelegates.viewbinding)
+    implementation(libs.adapterdelegates)
     implementation(libs.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
     implementation(libs.navigation.fragment.ktx)

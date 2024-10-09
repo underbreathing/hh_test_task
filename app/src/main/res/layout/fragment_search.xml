@@ -31,4 +31,24 @@
         app:layout_constraintStart_toEndOf="@id/et_main_search"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_offers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/et_main_search"
+        tools:listitem="@layout/offer_rv_item" />
+
+    <TextView
+        android:id="@+id/tv_title_vacancies"
+        style="@style/text_title_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:lines="1"
+        android:text="Вакансии для вас"
+        app:layout_constraintTop_toBottomOf="@id/rv_offers" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
