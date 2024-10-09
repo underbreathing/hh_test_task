@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="code_entry_title">Отправили код на %1$s</string>
+    <string name="search_vacancies_title">Вакансии для вас</string>
 </resources>

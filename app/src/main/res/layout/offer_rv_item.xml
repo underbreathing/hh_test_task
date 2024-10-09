@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="132dp"
+    android:layout_height="120dp"
+    android:layout_marginEnd="8dp"
+    android:background="@drawable/rounded_corners_gray1"
+    android:orientation="vertical"
+    android:paddingHorizontal="8dp"
+    android:paddingVertical="10dp">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone"
+        tools:src="@drawable/near_vacancies" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/offer_title_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:breakStrategy="simple"
+        android:maxLines="3"
+        tools:text="[Временная работа или подработка]" />
+
+    <TextView
+        android:id="@+id/tv_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:textAppearance="@style/text_1"
+        android:textColor="@color/green"
+        android:visibility="gone"
+        tools:text="Поднять" />
+
+
+</LinearLayout>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sheverdyaevartem.hh.sign_in.FragmentSign">
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/text_title_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Вход в личный кабинет"
+        app:layout_constraintStart_toEndOf="@id/guide_left"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/margin_primary" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/margin_primary" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_left_inner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="32dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_right_inner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="32dp" />
+
+    <View
+        android:id="@+id/frame1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="@dimen/margin_primary"
+        android:background="@drawable/rounded_corners_gray1"
+        app:layout_constraintBottom_toTopOf="@id/frame2"
+        app:layout_constraintEnd_toStartOf="@id/guide_right"
+        app:layout_constraintStart_toEndOf="@id/guide_left"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tv_search_job_title"
+        style="@style/text_title_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Поиск работы"
+        app:layout_constraintBottom_toTopOf="@id/et_email_field"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@id/guide_left_inner"
+        app:layout_constraintTop_toTopOf="@id/frame1" />
+
+    <EditText
+        android:id="@+id/et_email_field"
+        style="@style/main_et_style"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginVertical="16dp"
+        android:hint="user@example.com"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@id/b_next"
+        app:layout_constraintEnd_toStartOf="@id/guide_right_inner"
+        app:layout_constraintStart_toEndOf="@id/guide_left_inner"
+        app:layout_constraintTop_toBottomOf="@id/tv_search_job_title" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/b_next"
+        style="@style/buttom_blue_short"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/button_short_height"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/button_toggle"
+        android:enabled="false"
+        android:paddingHorizontal="44dp"
+        android:text="Продолжить"
+        app:layout_constraintBottom_toBottomOf="@id/frame1"
+        app:layout_constraintEnd_toStartOf="@id/t_next_with_password"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@id/guide_left_inner"
+        app:layout_constraintTop_toBottomOf="@id/et_email_field" />
+
+    <TextView
+        android:id="@+id/t_next_with_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Войти с паролем"
+        android:textAppearance="@style/button_text_2"
+        android:textColor="@color/blue"
+        app:layout_constraintBaseline_toBaselineOf="@id/b_next"
+        app:layout_constraintEnd_toStartOf="@id/guide_right_inner"
+        app:layout_constraintStart_toEndOf="@id/b_next"
+        app:layout_constraintTop_toBottomOf="@id/et_email_field" />
+
+
+    <View
+        android:id="@+id/frame2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/rounded_corners_gray1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guide_right"
+        app:layout_constraintStart_toEndOf="@id/guide_left"
+        app:layout_constraintTop_toBottomOf="@id/frame1" />
+
+    <TextView
+        android:id="@+id/tv_search_employees_title"
+        style="@style/text_title_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Поиск сотрудников"
+        app:layout_constraintBottom_toTopOf="@id/tv_search_employees_desc"
+        app:layout_constraintStart_toEndOf="@id/guide_left_inner"
+        app:layout_constraintTop_toTopOf="@id/frame2"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+    <TextView
+        android:id="@+id/tv_search_employees_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="@dimen/margin_primary"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="Размещение вакансий и доступ к базе резюме"
+        android:textAppearance="@style/button_text_2"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/b_search_employees"
+        app:layout_constraintEnd_toStartOf="@id/guide_right_inner"
+        app:layout_constraintStart_toEndOf="@id/guide_left_inner"
+        app:layout_constraintTop_toBottomOf="@id/tv_search_employees_title" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/b_search_employees"
+        style="@style/buttom_green"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="24dp"
+        android:text="Я ищу сотрудников"
+        app:layout_constraintBottom_toBottomOf="@id/frame2"
+        app:layout_constraintEnd_toStartOf="@id/guide_right_inner"
+        app:layout_constraintStart_toEndOf="@id/guide_left_inner"
+
+        app:layout_constraintTop_toBottomOf="@id/tv_search_employees_desc" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,10 +34,25 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
 
+
+    implementation(libs.adapterdelegates.viewbinding)
+    implementation(libs.adapterdelegates)
+    implementation(libs.fragment.ktx)
+    implementation(libs.navigation.ui.ktx)
+    implementation(libs.navigation.fragment.ktx)
+    implementation(libs.glide)
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
+    implementation(libs.gson)
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
