@@ -4,21 +4,129 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
     android:background="@drawable/rounded_corners_gray1"
     android:padding="@dimen/padding_primary">
 
 
     <TextView
+        android:id="@+id/tv_now_seeing"
         style="@style/text_1_green"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:lines="1"
+        android:text="[Сейчас просматривают 15 человек]"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@id/tv_vacancy_title"
+        app:layout_constraintEnd_toStartOf="@id/b_like"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Сейчас просматривают 15 человек" />
+        app:layout_constraintVertical_chainStyle="packed" />
 
+    <ImageButton
+        android:id="@+id/b_like"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/favorite_not_pressed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tv_vacancy_title"
+        style="@style/text_title_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vacancy_margin"
+        android:breakStrategy="simple"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@id/tv_salary"
+        app:layout_constraintEnd_toEndOf="@id/tv_now_seeing"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_now_seeing"
+        tools:text="[Дизайнер для маркетплейсов Вайлдберрис и озон]" />
+
+    <TextView
+        android:id="@+id/tv_salary"
+        style="@style/text_title_2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vacancy_margin"
+        app:layout_constraintBottom_toTopOf="@id/tv_city"
+        app:layout_constraintEnd_toEndOf="@id/tv_now_seeing"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_vacancy_title"
+        tools:text="[1500-2700 BR]" />
+
+    <TextView
+        android:id="@+id/tv_city"
+        style="@style/text_1_white"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vacancy_margin"
+        app:layout_constraintBottom_toTopOf="@id/tv_city"
+        app:layout_constraintEnd_toEndOf="@id/tv_now_seeing"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_salary"
+        tools:text="[Минск]" />
+
+    <TextView
+        android:id="@+id/tv_company"
+        style="@style/text_1_white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:drawablePadding="4dp"
+        app:drawableEndCompat="@drawable/company_verification"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@id/tv_experience"
+        app:layout_constraintEnd_toEndOf="@id/tv_now_seeing"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_city"
+        tools:text="[Мобрикс sdf sd sв sd sd sd sd sd sd sd sd sd sd sd sd sd  ]" />
+
+    <TextView
+        android:id="@+id/tv_experience"
+        style="@style/text_1_white"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vacancy_margin"
+        android:drawablePadding="8dp"
+        app:drawableStartCompat="@drawable/bag"
+        app:layout_constraintBottom_toTopOf="@id/tv_publication_date"
+        app:layout_constraintEnd_toEndOf="@id/tv_now_seeing"
+        app:layout_constraintStart_toStartOf="@id/tv_company"
+        app:layout_constraintTop_toBottomOf="@id/tv_company"
+        tools:text="[Опыт от 1 до 3 лет]" />
+
+    <TextView
+        android:id="@+id/tv_publication_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vacancy_margin"
+        android:textAppearance="@style/text_1"
+        android:textColor="@color/gray3"
+        app:layout_constraintBottom_toTopOf="@id/b_respond"
+        app:layout_constraintEnd_toEndOf="@id/tv_now_seeing"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_experience"
+        tools:text="[Опубликовано 20-го февраля]" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/b_respond"
+        style="@style/buttom_green"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="20dp"
+        android:text="Откликнуться"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_publication_date" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

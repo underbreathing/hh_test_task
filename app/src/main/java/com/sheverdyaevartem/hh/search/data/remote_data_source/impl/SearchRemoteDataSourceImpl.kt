@@ -1,5 +1,6 @@
 package com.sheverdyaevartem.hh.search.data.remote_data_source.impl
 
+import android.util.Log
 import com.sheverdyaevartem.hh.core.network.ConnectivityVerifier
 import com.sheverdyaevartem.hh.search.data.remote_data_source.api.HHSearchApi
 import com.sheverdyaevartem.hh.search.data.remote_data_source.api.SearchRemoteDataSource
@@ -8,7 +9,10 @@ import com.sheverdyaevartem.hh.search.data.remote_data_source.dto.OffersVacancie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class SearchRemoteDataSourceImpl(private val searchService: HHSearchApi, private val connectivityVerifier: ConnectivityVerifier) :
+class SearchRemoteDataSourceImpl(
+    private val searchService: HHSearchApi,
+    private val connectivityVerifier: ConnectivityVerifier
+) :
     SearchRemoteDataSource {
     override suspend fun doRequest(dto: Any): NetworkResponse {
         return if (!connectivityVerifier.isConnected()) {
@@ -18,10 +22,7 @@ class SearchRemoteDataSourceImpl(private val searchService: HHSearchApi, private
                 try {
                     when (dto) {
                         is OffersVacanciesRequest -> {
-                            val response = searchService.getOffersAndVacancies(dto.id).apply { resultCode = 200 }
-                            response
-//                            //plug
-//                            SmsCodeVerifiedResponse(true).apply { resultCode = 200 }
+                            searchService.getOffersAndVacancies(dto.id).apply { resultCode = 200 }
                         }
 
                         else -> {

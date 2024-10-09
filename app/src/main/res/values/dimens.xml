@@ -2,6 +2,8 @@
 <resources>
     <dimen name="margin_primary">16dp</dimen>
     <dimen name="big_button_height">48dp</dimen>
-    <dimen name="button_height">40dp</dimen>
+    <dimen name="button_short_height">40dp</dimen>
     <dimen name="padding_primary">16dp</dimen>
+    <dimen name="vacancy_margin">10dp</dimen>
+    <dimen name="button_height">48dp</dimen>
 </resources>

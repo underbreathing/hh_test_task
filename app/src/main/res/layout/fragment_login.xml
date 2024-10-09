@@ -86,7 +86,7 @@
         android:id="@+id/b_next"
         style="@style/buttom_blue_short"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/button_height"
+        android:layout_height="@dimen/button_short_height"
         android:layout_marginBottom="24dp"
         android:background="@drawable/button_toggle"
         android:enabled="false"

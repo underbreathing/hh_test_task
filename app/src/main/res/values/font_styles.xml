@@ -20,6 +20,7 @@
 
     <style name="Title3">
         <item name="android:fontFamily">@font/sfprodisplaymedium</item>
+        <item name="android:fontWeight">500</item>
         <item name="android:textSize">16sp</item>
     </style>
 

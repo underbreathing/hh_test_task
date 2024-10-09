@@ -4,21 +4,31 @@ import com.sheverdyaevartem.hh.search.data.remote_data_source.api.SearchRemoteDa
 import com.sheverdyaevartem.hh.search.data.remote_data_source.dto.OffersVacanciesRequest
 import com.sheverdyaevartem.hh.search.data.remote_data_source.dto.OffersVacanciesResponse
 import com.sheverdyaevartem.hh.search.data.remote_data_source.mappers.OfferDtoMapper
+import com.sheverdyaevartem.hh.search.data.remote_data_source.mappers.VacancyDtoMapper
 import com.sheverdyaevartem.hh.search.domain.repository.SearchNetworkRepository
-import com.sheverdyaevartem.hh.search.domain.model.Offer
+import com.sheverdyaevartem.hh.search.domain.model.OffersVacancies
 import com.sheverdyaevartem.hh.search.domain.model.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class SearchNetworkRepositoryImpl(
-    private val searchRemoteDataSource: SearchRemoteDataSource, private val offerDtoMapper: OfferDtoMapper
+    private val searchRemoteDataSource: SearchRemoteDataSource,
+    private val offerDtoMapper: OfferDtoMapper,
+    private val vacancyDtoMapper: VacancyDtoMapper
 ) : SearchNetworkRepository {
-    override fun getInitData(id: String): Flow<Resource<List<Offer>>> {
+    override fun getInitData(id: String): Flow<Resource<OffersVacancies>> {
         return flow {
             val response = searchRemoteDataSource.doRequest(OffersVacanciesRequest(id))
 
             if (response is OffersVacanciesResponse) {
-                emit(Resource.Success(response.offerDtos.map(offerDtoMapper::map)))
+                emit(
+                    Resource.Success(
+                        OffersVacancies(
+                            response.offerDtoList?.map(offerDtoMapper::map),
+                            response.vacancyDtoList?.map(vacancyDtoMapper::map)
+                        )
+                    )
+                )
             } else {
                 emit(processResultCode(response.resultCode))
             }

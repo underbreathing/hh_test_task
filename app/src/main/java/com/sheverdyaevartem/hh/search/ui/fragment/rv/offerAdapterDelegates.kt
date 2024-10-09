@@ -15,7 +15,6 @@ fun offerFictiveAdapterDelegate() =
     adapterDelegateViewBinding<FictiveRVItem, RVItem, OfferRvFictiveItemBinding>({ layoutInflater, parent ->
         OfferRvFictiveItemBinding.inflate(layoutInflater, parent, false)
     }) {
-
         val shimmerAnimation =
             AnimationUtils.loadAnimation(itemView.context, R.anim.shimmer_anim)
         binding.offerItemLayout.startAnimation(shimmerAnimation)
@@ -26,12 +25,12 @@ fun offerAdapterDelegate(onItemClicked: (OfferRVItem) -> Unit) =
         OfferRvItemBinding.inflate(layoutInflater, parent, false)
     }) {
         bind {
-            item.offerInfo.buttonText?.let {
+            item.buttonText?.let {
                 binding.tvButton.isVisible = true
                 binding.tvButton.text = it
             }
-            binding.tvTitle.text = item.offerInfo.title.trim()
-            item.offerInfo.id?.let {
+            binding.tvTitle.text = item.title.trim()
+            item.id?.let {
                 val drawableRes = getDrawableResource(it)
                 if (drawableRes != -1) {
                     binding.ivIcon.isVisible = true

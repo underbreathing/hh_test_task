@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -17,12 +16,14 @@ import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.sheverdyaevartem.hh.databinding.FragmentSearchBinding
 import com.sheverdyaevartem.hh.search.ui.fragment.rv.FictiveRVItem
 import com.sheverdyaevartem.hh.search.ui.fragment.rv.OfferRVItem
+import com.sheverdyaevartem.hh.search.ui.fragment.rv.OfferVacancyRVItems
+import com.sheverdyaevartem.hh.search.ui.fragment.rv.VacancyFictiveRVItem
 import com.sheverdyaevartem.hh.search.ui.fragment.rv.offerAdapterDelegate
 import com.sheverdyaevartem.hh.search.ui.fragment.rv.offerFictiveAdapterDelegate
-import com.sheverdyaevartem.hh.search.ui.model.OfferInfo
+import com.sheverdyaevartem.hh.search.ui.fragment.rv.vacancyAdapterDelegate
+import com.sheverdyaevartem.hh.search.ui.fragment.rv.vacancyFictiveAdapterDelegate
 import com.sheverdyaevartem.hh.search.ui.view_model.SearchViewModel
 import com.sheverdyaevartem.hh.search.ui.view_model.states.InitDataState
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -41,12 +42,16 @@ class FragmentSearch : Fragment() {
 
     private var viewModel: SearchViewModel? = null
 
-    private val adapter = ListDelegationAdapter(
+    private val offerAdapter = ListDelegationAdapter(
         offerAdapterDelegate { item ->
             openLink(item)
         },
         offerFictiveAdapterDelegate()
+    )
 
+    private val vacancyAdapter = ListDelegationAdapter(
+        vacancyAdapterDelegate(),
+        vacancyFictiveAdapterDelegate()
     )
 
     override fun onCreateView(
@@ -70,26 +75,28 @@ class FragmentSearch : Fragment() {
             when (initDataState) {
                 is InitDataState.Content -> showContent(initDataState.data)
                 InitDataState.ConnectionError -> showConnectionError()
-                InitDataState.Empty -> showEmpty()
                 InitDataState.InternalError -> showInternalError()
                 InitDataState.IsLoading -> showLoading()
                 InitDataState.ServerError -> showServerError()
             }
         }
 
-        binding.rvOffers.adapter = adapter
+        binding.rvOffers.adapter = offerAdapter
+        binding.rvVacancies.adapter = vacancyAdapter
     }
 
     private fun openLink(item: OfferRVItem) {
-        startActivity(
-            Intent(
-                Intent.ACTION_VIEW, Uri.parse(item.offerInfo.link)
+        item.link?.let { link ->
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW, Uri.parse(link)
+                )
             )
-        )
+        }
     }
 
     private fun showServerError() {
-        showEmpty()
+        showOffersEmpty()
     }
 
     private fun showSnackBar(message: String) {
@@ -101,22 +108,41 @@ class FragmentSearch : Fragment() {
     }
 
     private fun showLoading() {
-        adapter.items = List(3) { FictiveRVItem() }
-        adapter.notifyDataSetChanged()
+        offerAdapter.items = List(3) { FictiveRVItem() }
+        offerAdapter.notifyDataSetChanged()
+        vacancyAdapter.items = List(2) { VacancyFictiveRVItem() }
+        vacancyAdapter.notifyDataSetChanged()
     }
 
     private fun showInternalError() {
-        showEmpty()
+        showOffersEmpty()
+        showOffersEmpty()
     }
 
-    private fun showEmpty() {
+    private fun showOffersEmpty() {
         binding.rvOffers.isVisible = false
     }
 
-    private fun showContent(data: List<OfferRVItem>) {
-        binding.rvOffers.isVisible = true
-        adapter.items = data
-        adapter.notifyDataSetChanged()
+    private fun showVacanciesEmpty() {
+        binding.rvVacancies.isVisible = false
+    }
+
+    private fun showContent(data: OfferVacancyRVItems) {
+        if (data.offerRVItems.isEmpty()) {
+            showOffersEmpty()
+        } else {
+            binding.rvOffers.isVisible = true
+            offerAdapter.items = data.offerRVItems
+            offerAdapter.notifyDataSetChanged()
+        }
+        if (data.vacancyRVItems.isEmpty()) {
+            showVacanciesEmpty()
+        } else {
+            //сделать в макете невидимым
+            binding.rvVacancies.isVisible = true
+            vacancyAdapter.items = data.vacancyRVItems
+            vacancyAdapter.notifyDataSetChanged()
+        }
     }
 
     private fun showConnectionError() {
