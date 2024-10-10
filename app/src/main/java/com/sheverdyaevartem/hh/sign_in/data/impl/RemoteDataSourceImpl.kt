@@ -1,13 +1,13 @@
 package com.sheverdyaevartem.hh.sign_in.data.impl
 
 
-import com.sheverdyaevartem.hh.core.network.ConnectivityVerifier
 import com.sheverdyaevartem.hh.sign_in.data.dto.EmailVerifiedResponse
 import com.sheverdyaevartem.hh.sign_in.data.dto.EmailVerifyRequest
 import com.sheverdyaevartem.hh.sign_in.data.dto.NetworkResponse
 import com.sheverdyaevartem.hh.sign_in.data.dto.SmsCodeVerifiedResponse
 import com.sheverdyaevartem.hh.sign_in.data.dto.SmsCodeVerifyRequest
 import com.sheverdyaevartem.hh.sign_in.data.remote_data_source.RemoteDataSource
+import com.sheverdyaevartem.hh.utils.network.ConnectivityVerifier
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

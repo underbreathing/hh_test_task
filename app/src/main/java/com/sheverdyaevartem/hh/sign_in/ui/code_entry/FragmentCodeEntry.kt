@@ -18,7 +18,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.sheverdyaevartem.hh.R
 import com.sheverdyaevartem.hh.databinding.FragmentCodeEntryBinding
-import com.sheverdyaevartem.hh.search.ui.fragment.FragmentSearch
+import com.sheverdyaevartem.hh.feature_search.api.ui.fragment.FragmentSearch
 import com.sheverdyaevartem.hh.sign_in.ui.code_entry.view_model.CodeEntryViewModel
 import com.sheverdyaevartem.hh.sign_in.ui.code_entry.view_model.model.CodeVerifiedState
 import org.koin.android.ext.android.inject
@@ -113,11 +113,12 @@ class FragmentCodeEntry : Fragment() {
     }
 
     private fun setButtonConfirmAccess() {
-        binding.bConfirm.isEnabled =
-            binding.code1.text.isNotEmpty()
-                    && binding.code2.text.isNotEmpty()
-                    && binding.code3.text.isNotEmpty()
-                    && binding.code4.text.isNotEmpty()
+        binding.bConfirm.isEnabled = with(binding) {
+            code1.text.isNotEmpty()
+                    && code2.text.isNotEmpty()
+                    && code3.text.isNotEmpty()
+                    && code4.text.isNotEmpty()
+        }
     }
 
     private fun setBackspaceBehavior(currentEditText: EditText, previousEditText: EditText) {
@@ -163,7 +164,7 @@ class FragmentCodeEntry : Fragment() {
             }
         })
         if (nextIsLast) {
-            next.addTextChangedListener(onTextChanged = { charSequence, _, _, _ ->
+            next.addTextChangedListener(onTextChanged = { _, _, _, _ ->
                 setButtonConfirmAccess()
             })
         }

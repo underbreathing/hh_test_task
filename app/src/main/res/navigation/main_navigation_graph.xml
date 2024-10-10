@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentSearch"
-        android:name="com.sheverdyaevartem.hh.search.ui.fragment.FragmentSearch"
+        android:name="com.sheverdyaevartem.hh.feature_search.api.ui.fragment.FragmentSearch"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment

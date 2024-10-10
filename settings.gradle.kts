@@ -15,4 +15,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "hh_test_task"
 include(":app")
- 
+include(":core:uikit")
+include(":core:utils")
+include(":feature_search:api")
+include(":feature_search:impl")

@@ -40,24 +40,34 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":core:uikit"))
+    implementation(project(":core:utils"))
+    implementation(project(":feature_search:impl"))
 
     implementation(libs.adapterdelegates.viewbinding)
     implementation(libs.adapterdelegates)
+
     implementation(libs.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
     implementation(libs.navigation.fragment.ktx)
+
     implementation(libs.glide)
+
     implementation(libs.koin.core)
     implementation(libs.koin.android)
+
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
+
     implementation(libs.gson)
+
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
+
     testImplementation(libs.junit)
+
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }

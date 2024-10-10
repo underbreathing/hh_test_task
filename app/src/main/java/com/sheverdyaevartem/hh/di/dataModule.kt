@@ -1,11 +1,11 @@
 package com.sheverdyaevartem.hh.di
 
-import com.sheverdyaevartem.hh.core.network.ConnectivityVerifier
-import com.sheverdyaevartem.hh.search.data.remote_data_source.api.HHSearchApi
-import com.sheverdyaevartem.hh.search.data.remote_data_source.api.SearchRemoteDataSource
-import com.sheverdyaevartem.hh.search.data.remote_data_source.impl.SearchRemoteDataSourceImpl
-import com.sheverdyaevartem.hh.search.data.remote_data_source.mappers.OfferDtoMapper
-import com.sheverdyaevartem.hh.search.data.remote_data_source.mappers.VacancyDtoMapper
+import com.sheverdyaevartem.hh.utils.network.ConnectivityVerifier
+import com.sheverdyaevartem.hh.feature_search.impl.data.remote_data_source.api.HHSearchApi
+import com.sheverdyaevartem.hh.feature_search.impl.data.remote_data_source.api.SearchRemoteDataSource
+import com.sheverdyaevartem.hh.feature_search.impl.data.remote_data_source.impl.SearchRemoteDataSourceImpl
+import com.sheverdyaevartem.hh.feature_search.impl.data.remote_data_source.mappers.OfferDtoMapper
+import com.sheverdyaevartem.hh.feature_search.impl.data.remote_data_source.mappers.VacancyDtoMapper
 import com.sheverdyaevartem.hh.sign_in.data.impl.RemoteDataSourceImpl
 import com.sheverdyaevartem.hh.sign_in.data.remote_data_source.RemoteDataSource
 import org.koin.android.ext.koin.androidContext
@@ -25,7 +25,10 @@ val dataModule = module {
     single { ConnectivityVerifier(androidContext()) }
 
     single<SearchRemoteDataSource> {
-        SearchRemoteDataSourceImpl(get(), get())
+        SearchRemoteDataSourceImpl(
+            get(),
+            get()
+        )
     }
 
     single<RemoteDataSource> {
