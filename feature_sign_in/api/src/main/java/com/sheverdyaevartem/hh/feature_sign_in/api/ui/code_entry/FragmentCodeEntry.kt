@@ -70,7 +70,7 @@ class FragmentCodeEntry : Fragment() {
             when (receivedData) {
                 is CodeVerifiedState.Answer -> {
                     if (receivedData.isAccepted) {
-                        (requireActivity() as LoginNavigator).navigateToFragmentSearch(receivedData.id)
+                        (requireActivity() as LoginNavigator).navigateToFragmentSearch()
                     } else {
                         showSnackBar("Неверный код!")
                     }

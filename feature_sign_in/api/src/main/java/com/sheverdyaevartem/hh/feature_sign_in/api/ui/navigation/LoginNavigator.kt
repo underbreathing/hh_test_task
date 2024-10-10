@@ -4,5 +4,5 @@ interface LoginNavigator {
 
     fun navigateToCodeEntry(email: String)
 
-    fun navigateToFragmentSearch(id: String)
+    fun navigateToFragmentSearch()
 }

@@ -3,6 +3,7 @@ package com.sheverdyaevartem.hh.feature_sign_in.api.ui.code_entry.view_model
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sheverdyaevartem.hh.feature_sign_in.api.domain.api.LocalRepository
 import com.sheverdyaevartem.hh.feature_sign_in.api.domain.api.NetworkRepository
 import com.sheverdyaevartem.hh.feature_sign_in.api.domain.model.Resource
 
@@ -11,7 +12,10 @@ import com.sheverdyaevartem.hh.feature_sign_in.api.ui.code_entry.view_model.mode
 import com.sheverdyaevartem.hh.utils.view_model.SingleLiveEvent
 import kotlinx.coroutines.launch
 
-class CodeEntryViewModel(private val networkRepository: NetworkRepository) : ViewModel() {
+class CodeEntryViewModel(
+    private val networkRepository: NetworkRepository,
+    private val localRepository: LocalRepository
+) : ViewModel() {
 
     private val _codeVerified: SingleLiveEvent<CodeVerifiedState> = SingleLiveEvent()
     val codeVerified: LiveData<CodeVerifiedState>
@@ -22,8 +26,9 @@ class CodeEntryViewModel(private val networkRepository: NetworkRepository) : Vie
             networkRepository.verifySmsCode(email, code).collect { data ->
                 when (data) {
                     is Resource.Answer -> {
+                        localRepository.safeId(data.data.second)
                         _codeVerified.value =
-                            CodeVerifiedState.Answer(data.data.first, data.data.second)
+                            CodeVerifiedState.Answer(data.data.first)
                     }
 
                     is Resource.InternetError ->

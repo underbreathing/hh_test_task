@@ -2,7 +2,7 @@ package com.sheverdyaevartem.hh.feature_sign_in.api.ui.code_entry.view_model.mod
 
 sealed interface CodeVerifiedState {
 
-    data class Answer(val isAccepted: Boolean, val id: String) : CodeVerifiedState
+    data class Answer(val isAccepted: Boolean) : CodeVerifiedState
 
     data object ServerError : CodeVerifiedState
     data object RequestError : CodeVerifiedState

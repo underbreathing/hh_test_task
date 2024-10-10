@@ -1,4 +1,4 @@
-package com.sheverdyaevartem.hh.feature_search.impl.data.repository
+package com.sheverdyaevartem.hh.feature_search.impl.data.impl
 
 import com.sheverdyaevartem.hh.feature_search.impl.data.remote_data_source.api.SearchRemoteDataSource
 import com.sheverdyaevartem.hh.feature_search.impl.data.remote_data_source.dto.OffersVacanciesRequest

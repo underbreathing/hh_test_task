@@ -1,30 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_navigation_graph"
-    app:startDestination="@id/fragmentSign">
+    app:startDestination="@id/fragmentSearch">
 
-    <fragment
-        android:id="@+id/fragmentSign"
-        android:name="com.sheverdyaevartem.hh.feature_sign_in.api.ui.log_in.FragmentLogin"
-        android:label="fragment_sign"
-        tools:layout="@layout/fragment_login">
-        <action
-            android:id="@+id/action_fragmentSign_to_fragmentCodeEntry"
-            app:destination="@id/fragmentCodeEntry" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentCodeEntry"
-        android:name="com.sheverdyaevartem.hh.feature_sign_in.api.ui.code_entry.FragmentCodeEntry"
-        android:label="fragment_code_entry"
-        tools:layout="@layout/fragment_code_entry">
-        <action
-            android:id="@+id/action_fragmentCodeEntry_to_fragmentSearch"
-            app:destination="@id/fragmentSearch"
-            app:popUpTo="@id/fragmentSign"
-            app:popUpToInclusive="true" />
-    </fragment>
     <fragment
         android:id="@+id/fragmentSearch"
         android:name="com.sheverdyaevartem.hh.feature_search.api.ui.fragment.FragmentSearch"
@@ -50,4 +30,5 @@
         android:name="com.sheverdyaevartem.hh.plug_features.profile.ui.FragmentProfile"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+
 </navigation>

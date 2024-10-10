@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
@@ -25,23 +24,14 @@ import com.sheverdyaevartem.hh.feature_search.api.ui.fragment.rv.vacancyFictiveA
 import com.sheverdyaevartem.hh.feature_search.api.ui.view_model.SearchViewModel
 import com.sheverdyaevartem.hh.feature_search.api.ui.view_model.states.InitDataState
 import com.sheverdyaevartem.hh.uikit.FavoriteVacanciesIndicator
-import org.koin.androidx.viewmodel.ext.android.getViewModel
-import org.koin.core.parameter.parametersOf
+import org.koin.android.ext.android.inject
 
 class FragmentSearch : Fragment() {
-
-    companion object {
-        private const val NETWORK_ID_KEY = "id_key"
-
-        fun createArgs(id: String): Bundle {
-            return bundleOf(NETWORK_ID_KEY to id)
-        }
-    }
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
-    private var viewModel: SearchViewModel? = null
+    private val viewModel: SearchViewModel by inject()
 
     private val offerAdapter = ListDelegationAdapter(
         offerAdapterDelegate { item ->
@@ -66,11 +56,6 @@ class FragmentSearch : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val id = requireNotNull(arguments?.getString(NETWORK_ID_KEY))
-
-        viewModel = getViewModel { parametersOf(id) }
-
 
         viewModel?.initData?.observe(viewLifecycleOwner) { initDataState ->
             when (initDataState) {
@@ -164,6 +149,5 @@ class FragmentSearch : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        viewModel = null
     }
 }

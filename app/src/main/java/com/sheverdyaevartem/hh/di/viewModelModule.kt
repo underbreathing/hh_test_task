@@ -13,10 +13,10 @@ val viewModelModule = module {
     }
 
     viewModel {
-        CodeEntryViewModel(get())
+        CodeEntryViewModel(get(),get())
     }
 
-    viewModel { (id: String) ->
-        SearchViewModel(id, get())
+    viewModel {
+        SearchViewModel(get(),get())
     }
 }
