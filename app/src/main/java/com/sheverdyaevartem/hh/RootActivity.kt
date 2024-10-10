@@ -4,16 +4,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.sheverdyaevartem.hh.databinding.ActivityRootBinding
+import com.sheverdyaevartem.hh.feature_search.api.ui.fragment.FragmentSearch
+import com.sheverdyaevartem.hh.feature_sign_in.api.ui.code_entry.FragmentCodeEntry
+import com.sheverdyaevartem.hh.feature_sign_in.api.ui.navigation.LoginNavigator
 import com.sheverdyaevartem.hh.uikit.FavoriteVacanciesIndicator
 import com.sheverdyaevartem.hh.uikit.R as RUI
 
-class RootActivity : AppCompatActivity(), FavoriteVacanciesIndicator {
+class RootActivity : AppCompatActivity(), FavoriteVacanciesIndicator, LoginNavigator {
 
     private var _binding: ActivityRootBinding? = null
     private val binding get() = _binding!!
+
+    var navController: NavController? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +30,7 @@ class RootActivity : AppCompatActivity(), FavoriteVacanciesIndicator {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
 
-        val navController = navHostFragment.navController
+        navController = navHostFragment.navController
 
 //        val navGraph = navController.navInflater.inflate(R.navigation.main_navigation_graph)
 //
@@ -35,7 +41,7 @@ class RootActivity : AppCompatActivity(), FavoriteVacanciesIndicator {
 //
 //        navController.setGraph(navGraph,FragmentSearch.createArgs(id))
 
-        navController.addOnDestinationChangedListener { _, destination, _ ->
+        navController?.addOnDestinationChangedListener { _, destination, _ ->
 
             when (destination.id) {
                 R.id.fragmentSign, R.id.fragmentCodeEntry -> {
@@ -47,8 +53,23 @@ class RootActivity : AppCompatActivity(), FavoriteVacanciesIndicator {
                 }
             }
         }
+        navController?.let {
+            binding.bottomNavigationPanel.setupWithNavController(it)
+        }
+    }
 
-        binding.bottomNavigationPanel.setupWithNavController(navController)
+    override fun navigateToCodeEntry(email: String) {
+        navController?.navigate(
+            R.id.action_fragmentSign_to_fragmentCodeEntry,
+            FragmentCodeEntry.createArgs(email)
+        )
+    }
+
+    override fun navigateToFragmentSearch(id: String) {
+        navController?.navigate(
+            R.id.action_fragmentCodeEntry_to_fragmentSearch,
+            FragmentSearch.createArgs(id)
+        )
     }
 
     override fun onDestroy() {

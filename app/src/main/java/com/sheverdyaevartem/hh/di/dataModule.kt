@@ -6,8 +6,8 @@ import com.sheverdyaevartem.hh.feature_search.impl.data.remote_data_source.api.S
 import com.sheverdyaevartem.hh.feature_search.impl.data.remote_data_source.impl.SearchRemoteDataSourceImpl
 import com.sheverdyaevartem.hh.feature_search.impl.data.remote_data_source.mappers.OfferDtoMapper
 import com.sheverdyaevartem.hh.feature_search.impl.data.remote_data_source.mappers.VacancyDtoMapper
-import com.sheverdyaevartem.hh.sign_in.data.impl.RemoteDataSourceImpl
-import com.sheverdyaevartem.hh.sign_in.data.remote_data_source.RemoteDataSource
+import com.sheverdyaevartem.hh.impl.data.impl.RemoteDataSourceImpl
+import com.sheverdyaevartem.hh.impl.data.remote_data_source.RemoteDataSource
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -32,7 +32,7 @@ val dataModule = module {
     }
 
     single<RemoteDataSource> {
-        RemoteDataSourceImpl(get())//TODO(добавить туда репозиторий когда он будет)
+        RemoteDataSourceImpl(get())
     }
 
     single {

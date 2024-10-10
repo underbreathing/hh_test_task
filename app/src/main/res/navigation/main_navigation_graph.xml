@@ -2,12 +2,12 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/fragmentSign"
-    android:id="@+id/main_navigation_graph">
+    android:id="@+id/main_navigation_graph"
+    app:startDestination="@id/fragmentSign">
 
     <fragment
         android:id="@+id/fragmentSign"
-        android:name="com.sheverdyaevartem.hh.sign_in.ui.log_in.FragmentLogin"
+        android:name="com.sheverdyaevartem.hh.feature_sign_in.api.ui.log_in.FragmentLogin"
         android:label="fragment_sign"
         tools:layout="@layout/fragment_login">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentCodeEntry"
-        android:name="com.sheverdyaevartem.hh.sign_in.ui.code_entry.FragmentCodeEntry"
+        android:name="com.sheverdyaevartem.hh.feature_sign_in.api.ui.code_entry.FragmentCodeEntry"
         android:label="fragment_code_entry"
         tools:layout="@layout/fragment_code_entry">
         <action
@@ -32,22 +32,22 @@
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/fragmentFavourites"
-        android:name="com.sheverdyaevartem.hh.favourites.ui.FragmentFavourites"
+        android:name="com.sheverdyaevartem.hh.plug_features.favorites.ui.FragmentFavourites"
         android:label="fragment_favourites"
         tools:layout="@layout/fragment_favourites" />
     <fragment
         android:id="@+id/fragmentResponses"
-        android:name="com.sheverdyaevartem.hh.responses.ui.FragmentResponses"
+        android:name="com.sheverdyaevartem.hh.plug_features.responses.ui.FragmentResponses"
         android:label="fragment_responses"
         tools:layout="@layout/fragment_responses" />
     <fragment
         android:id="@+id/fragmentMessages"
-        android:name="com.sheverdyaevartem.hh.messages.ui.FragmentMessages"
+        android:name="com.sheverdyaevartem.hh.plug_features.messages.ui.FragmentMessages"
         android:label="fragment_messages"
         tools:layout="@layout/fragment_messages" />
     <fragment
         android:id="@+id/fragmentProfile"
-        android:name="com.sheverdyaevartem.hh.profile.ui.FragmentProfile"
+        android:name="com.sheverdyaevartem.hh.plug_features.profile.ui.FragmentProfile"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

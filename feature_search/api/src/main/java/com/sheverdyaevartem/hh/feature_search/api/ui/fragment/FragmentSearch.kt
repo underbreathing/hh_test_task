@@ -31,10 +31,10 @@ import org.koin.core.parameter.parametersOf
 class FragmentSearch : Fragment() {
 
     companion object {
-        private const val ID_KEY = "id_key"
+        private const val NETWORK_ID_KEY = "id_key"
 
         fun createArgs(id: String): Bundle {
-            return bundleOf(ID_KEY to id)
+            return bundleOf(NETWORK_ID_KEY to id)
         }
     }
 
@@ -67,9 +67,9 @@ class FragmentSearch : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        arguments?.let {
-            viewModel = getViewModel { parametersOf(it.getString(ID_KEY)) }
-        }
+        val id = requireNotNull(arguments?.getString(NETWORK_ID_KEY))
+
+        viewModel = getViewModel { parametersOf(id) }
 
 
         viewModel?.initData?.observe(viewLifecycleOwner) { initDataState ->
@@ -78,6 +78,7 @@ class FragmentSearch : Fragment() {
                     showContent(initDataState.data)
                     displayFavoriteCount(initDataState.countOfFavorites)
                 }
+
                 InitDataState.ConnectionError -> showConnectionError()
                 InitDataState.InternalError -> showInternalError()
                 InitDataState.IsLoading -> showLoading()
@@ -163,5 +164,6 @@ class FragmentSearch : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        viewModel = null
     }
 }

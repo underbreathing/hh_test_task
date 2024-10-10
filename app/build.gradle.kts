@@ -43,6 +43,7 @@ dependencies {
     implementation(project(":core:uikit"))
     implementation(project(":core:utils"))
     implementation(project(":feature_search:impl"))
+    implementation(project(":feature_sign_in:impl"))
 
     implementation(libs.adapterdelegates.viewbinding)
     implementation(libs.adapterdelegates)

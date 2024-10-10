@@ -14,7 +14,13 @@ class HHApp : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@HHApp)
-            modules(dataModule, repositoryModule, interactorModule, viewModelModule, uiModule)
+            modules(
+                dataModule,
+                repositoryModule,
+                interactorModule,
+                viewModelModule,
+                uiModule
+            )
         }
     }
 }
