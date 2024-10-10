@@ -9,12 +9,14 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.sheverdyaevartem.hh.databinding.ActivityRootBinding
+import com.sheverdyaevartem.hh.feature_search.api.ui.navigation.SearchNavigator
 import com.sheverdyaevartem.hh.feature_sign_in.api.ui.code_entry.FragmentCodeEntry
 import com.sheverdyaevartem.hh.feature_sign_in.api.ui.navigation.LoginNavigator
 import com.sheverdyaevartem.hh.uikit.FavoriteVacanciesIndicator
 import com.sheverdyaevartem.hh.uikit.R as RUI
 
-class RootActivity : AppCompatActivity(), FavoriteVacanciesIndicator, LoginNavigator {
+class RootActivity : AppCompatActivity(), FavoriteVacanciesIndicator, LoginNavigator,
+    SearchNavigator {
 
     private var _binding: ActivityRootBinding? = null
     private val binding get() = _binding!!
@@ -75,5 +77,9 @@ class RootActivity : AppCompatActivity(), FavoriteVacanciesIndicator, LoginNavig
 
     override fun navigateToFragmentSearch() {
         mainNavController?.setGraph(R.navigation.main_navigation_graph)
+    }
+
+    override fun navigateToVacancy() {
+        mainNavController?.navigate(R.id.action_fragmentSearch_to_fragmentVacancy)
     }
 }

@@ -51,7 +51,7 @@
         <item name="android:background">@drawable/button_toggle</item>
     </style>
 
-    <style name="buttom_blue" parent="Widget.AppCompat.Button">
+    <style name="button_blue" parent="Widget.AppCompat.Button">
         <item name="android:textAppearance">@style/button_text_1</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@drawable/button_enable</item>

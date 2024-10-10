@@ -1,0 +1,10 @@
+<androidx.appcompat.widget.AppCompatButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/b_moreVacancies"
+    style="@style/button_blue"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/button_height"
+    android:layout_marginTop="24dp"
+    android:layout_marginBottom="8dp"
+    android:paddingHorizontal="44dp"
+    tools:text="[Еще 143 вакансии]" />

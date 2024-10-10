@@ -9,7 +9,11 @@
         android:id="@+id/fragmentSearch"
         android:name="com.sheverdyaevartem.hh.feature_search.api.ui.fragment.FragmentSearch"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_fragmentSearch_to_fragmentVacancy"
+            app:destination="@id/fragmentVacancy" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentFavourites"
         android:name="com.sheverdyaevartem.hh.plug_features.favorites.ui.FragmentFavourites"
@@ -30,5 +34,9 @@
         android:name="com.sheverdyaevartem.hh.plug_features.profile.ui.FragmentProfile"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/fragmentVacancy"
+        android:name="com.sheverdyaevartem.hh.plug_features.vacancy.ui.FragmentVacancy"
+        android:label="FragmentVacancy" />
 
 </navigation>
