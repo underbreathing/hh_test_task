@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sheverdyaevartem.hh.feature_search.api.domain.interactors.SearchInteractor
 import com.sheverdyaevartem.hh.feature_search.api.domain.model.Resource
+import com.sheverdyaevartem.hh.feature_search.api.domain.repository.LocalRepository
 import com.sheverdyaevartem.hh.feature_search.api.ui.fragment.rv.OfferRVItem
 import com.sheverdyaevartem.hh.feature_search.api.ui.fragment.rv.OfferVacancyRVItems
 import com.sheverdyaevartem.hh.feature_search.api.ui.fragment.rv.VacancyRVItem
@@ -15,7 +16,7 @@ import com.sheverdyaevartem.hh.feature_search.api.ui.view_model.states.InitDataS
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
-    id: String,
+    localRepository: LocalRepository,
     private val searchInteractor: SearchInteractor
 ) : ViewModel() {
 
@@ -24,7 +25,7 @@ class SearchViewModel(
     val initData: LiveData<InitDataState> = _initDataLiveData
 
     init {
-        fillData(id)
+        fillData(localRepository.getId())
     }
 
     private fun fillData(id: String) {

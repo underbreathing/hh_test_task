@@ -2,19 +2,26 @@ package com.sheverdyaevartem.hh
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.sheverdyaevartem.hh.databinding.ActivityRootBinding
+import com.sheverdyaevartem.hh.feature_search.api.ui.navigation.SearchNavigator
+import com.sheverdyaevartem.hh.feature_sign_in.api.ui.code_entry.FragmentCodeEntry
+import com.sheverdyaevartem.hh.feature_sign_in.api.ui.navigation.LoginNavigator
 import com.sheverdyaevartem.hh.uikit.FavoriteVacanciesIndicator
 import com.sheverdyaevartem.hh.uikit.R as RUI
 
-class RootActivity : AppCompatActivity(), FavoriteVacanciesIndicator {
+class RootActivity : AppCompatActivity(), FavoriteVacanciesIndicator, LoginNavigator,
+    SearchNavigator {
 
     private var _binding: ActivityRootBinding? = null
     private val binding get() = _binding!!
 
+    private var mainNavController: NavController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,21 +31,16 @@ class RootActivity : AppCompatActivity(), FavoriteVacanciesIndicator {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
 
-        val navController = navHostFragment.navController
+        mainNavController = navHostFragment.navController
 
-//        val navGraph = navController.navInflater.inflate(R.navigation.main_navigation_graph)
-//
-//        navGraph.setStartDestination(R.id.fragmentSearch)
-//
-//        //достем id из sharedPreferences
-//        val id = "1z4TbeDkbfXkvgpoJprXbN85uCcD7f00r"
-//
-//        navController.setGraph(navGraph,FragmentSearch.createArgs(id))
+        mainNavController?.let {
+            binding.bottomNavigationPanel.setupWithNavController(it)
+        }
 
-        navController.addOnDestinationChangedListener { _, destination, _ ->
+        mainNavController?.addOnDestinationChangedListener { _, destination, _ ->
 
             when (destination.id) {
-                R.id.fragmentSign, R.id.fragmentCodeEntry -> {
+                R.id.fragmentLogin, R.id.fragmentCodeEntry -> {
                     binding.bottomNavigationPanel.isVisible = false
                 }
 
@@ -48,11 +50,11 @@ class RootActivity : AppCompatActivity(), FavoriteVacanciesIndicator {
             }
         }
 
-        binding.bottomNavigationPanel.setupWithNavController(navController)
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        mainNavController = null
         _binding = null
     }
 
@@ -64,5 +66,20 @@ class RootActivity : AppCompatActivity(), FavoriteVacanciesIndicator {
             badge.number = newCount
 
         }
+    }
+
+    override fun navigateToCodeEntry(email: String) {
+        mainNavController?.navigate(
+            R.id.action_fragmentLogin_to_fragmentCodeEntry,
+            FragmentCodeEntry.createArgs(email)
+        )
+    }
+
+    override fun navigateToFragmentSearch() {
+        mainNavController?.setGraph(R.navigation.main_navigation_graph)
+    }
+
+    override fun navigateToVacancy() {
+        mainNavController?.navigate(R.id.action_fragmentSearch_to_fragmentVacancy)
     }
 }

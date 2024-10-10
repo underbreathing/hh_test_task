@@ -20,11 +20,12 @@ fun vacancyFictiveAdapterDelegate() =
         binding.frameVacancyFictive.startAnimation(shimmerAnimation)
     }
 
-fun vacancyAdapterDelegate() =
+fun vacancyAdapterDelegate(onItemClicked: (VacancyRVItem) -> Unit) =
     adapterDelegateViewBinding<VacancyRVItem, RVItem, VacancyRvItemBinding>({ layoutInflater, parent ->
         VacancyRvItemBinding.inflate(layoutInflater, parent, false)
     }) {
         bind {
+            itemView.setOnClickListener { onItemClicked(item) }
 
             val nowLooking = item.lookingNumber
             val town = item.addressDto?.town

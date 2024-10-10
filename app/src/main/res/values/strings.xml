@@ -1,4 +1,3 @@
 <resources>
-    <string name="app_name">My Application</string>
-    <string name="code_entry_title">Отправили код на %1$s</string>
+    <string name="app_name">HH_test_application</string>
 </resources>
